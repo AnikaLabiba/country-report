@@ -41,8 +41,28 @@
         </div>
     </header>
     <main>
-        <div id="countries" class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-10 mx-16 mt-8">
+        <!-- spinner -->
+        <div id="spinner" class="flex justify-center align-middle">
+            <div class="w-16 h-16 border-b-2 border-gray-900 rounded-full animate-spin mt-8"></div>
+        </div>
 
+        <div>
+            <!-- <h3 id="error-nullArray" class="text-center fw-bold w-50 mx-auto mt-5 rounded-pill error">Sorry, no result
+                found.</h3> -->
+            <!-- <h3 id="error-emptyInput" class="text-center fw-bold w-50 mx-auto mt-5 error">
+                Please
+                enter a
+                country name.</h3> -->
+        </div>
+        <!-- country details -->
+        <div id="country-detail">
+
+        </div>
+        <!-- all countires -->
+        <div id="search-results">
+            <div id="countries" class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-10 mx-16 mt-8">
+
+            </div>
         </div>
     </main>
     <!-- js -->

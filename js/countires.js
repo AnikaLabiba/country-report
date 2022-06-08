@@ -1,22 +1,16 @@
-const inputField = document.getElementById("search-input");
-inputField.addEventListener("keyup", function (event) {
-    if (event.key === 'Enter') {
-        //event.preventDefault();
-        document.getElementById("button-search").click();
-    }
-});
-
-const searchCountry = () => {
-    const searchInput = document.getElementById('search-input');
-    const searchText = searchInput.value;
-    console.log(searchText);
-    // searchInput.value = '';
-
-    // const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`
-    // fetch(url)
-    //     .then(res => res.json())
-    //     .then(data => displaySearchMeal(data.meals))
+//control spinner
+const toggleSpinner = displayStyle => {
+    document.getElementById('spinner').style.display = displayStyle;
 }
+//control phones result
+const toggleSearchResult = displayStyle => {
+    document.getElementById('search-results').style.display = displayStyle;
+}
+// const showErrorEmptyInput = displayStyle => {
+//     document.getElementById('error-emptyInput').style.display = displayStyle;
+// }
+
+// loading all countries
 const loadCountries = () => {
     fetch('https://restcountries.com/v3.1/all')
         .then(res => res.json())
@@ -24,6 +18,7 @@ const loadCountries = () => {
 }
 loadCountries()
 
+// displaying all countries
 const displayCountries = countries => {
     // for (const country of countries) {
     //     console.log(country);
@@ -36,6 +31,7 @@ const displayCountries = countries => {
     });
     console.log(sortedCountires);
     const countriesDiv = document.getElementById('countries');
+    countriesDiv.innerHTML = ''
     sortedCountires.forEach(country => {
         //console.log(country);
         let language;
@@ -43,7 +39,7 @@ const displayCountries = countries => {
         if (languages) {
             language = Object.values(languages)
         }
-
+        toggleSpinner('none')
         const div = document.createElement('div');
         div.classList.add('country')
         div.innerHTML = `
@@ -63,4 +59,48 @@ const displayCountries = countries => {
         `;
         countriesDiv.appendChild(div);
     });
+    toggleSearchResult('block')
+    toggleSpinner('none')
+}
+
+
+const inputField = document.getElementById("search-input");
+inputField.addEventListener("keyup", function (event) {
+    if (event.key === 'Enter') {
+        //event.preventDefault();
+        document.getElementById("button-search").click();
+    }
+});
+// taking search text
+const searchCountry = () => {
+    const searchInput = document.getElementById('search-input');
+    const searchText = searchInput.value;
+    console.log(searchText);
+    searchInput.value = '';
+    toggleSpinner('block')
+    toggleSearchResult('none')
+    // showErrorEmptyInput('none')
+    if (searchText != '') {
+        // showErrorEmptyInput('none')
+        const url = `https://restcountries.com/v3.1/name/${searchText}`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => displayCountries(data))
+    }
+    else {
+        toggleSpinner('none')
+        showErrorEmptyInput('block')
+
+    }
+
+}
+
+const displayCountryDetail = country => {
+    console.log(country);
+    const countryDiv = document.getElementById('country-detail');
+    countryDiv.innerHTML = `
+        <h5>${country.name.common}</h4>
+        <p>population: ${country.population}</p>
+        <img width="200px" src="${country.flag}">
+    `
 }
