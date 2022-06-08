@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Libre Baskerville', serif;
+}
+.headerDiv{
+    background-image: url('/images/header.png');
+}
+.country{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 15px;
+    border-radius: 10px;
+    background-image: url('/images/cardBG.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.country img{
+    width: 80%;
+    height: 100px;
+    margin: 0 auto;
+}
+.country .details-btn{
+    background-color: rgb(233, 159, 159);
+    border: none;
+}
+.country .details-btn:hover{
+    background-color: rgb(207, 39, 39);
+    border: none;  
+}
+/* making Mobile and tab responsive */
+@media only screen and (max-width:576px) {
+    .pipes .products{
+        width: 80%;
+        font-size: 13px;
+    }
+    .pipes .hr-line{
+        width: 80%;
+        margin: 15px auto;
+        border-top: 2px solid red;
+    }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 992px) {
+    .country{
+        width: 100%;
+    }
+}
